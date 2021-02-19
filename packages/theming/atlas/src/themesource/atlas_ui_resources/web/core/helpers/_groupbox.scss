@@ -12,6 +12,7 @@
 //## Helper classes to change the look and feel of the component
 ========================================================================== */
 // Color variations
+.groupbox-secondary,
 .groupbox-default {
     @include groupbox-variant($groupbox-default-color, $groupbox-default-bg);
 }
@@ -37,7 +38,7 @@
 
 .groupbox-transparent {
     > .mx-groupbox-header {
-        padding: $spacing-small*1.5 0;
+        padding: $spacing-small * 1.5 0;
         color: $gray-darker;
         border-style: none;
         background: transparent;
