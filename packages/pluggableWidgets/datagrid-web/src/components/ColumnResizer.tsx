@@ -60,7 +60,7 @@ export function ColumnResizer({
             document.removeEventListener("touchmove", onMouseMove);
             document.removeEventListener("touchend", onEndDrag);
         };
-    }, [isResizing, resizerReference.current]); // Required dependencies because of the callback's references
+    }, [onMouseMove, onEndDrag]);
 
     return (
         <div ref={resizerReference} onMouseDown={onStartDrag} onTouchStart={onStartDrag} className="column-resizer">

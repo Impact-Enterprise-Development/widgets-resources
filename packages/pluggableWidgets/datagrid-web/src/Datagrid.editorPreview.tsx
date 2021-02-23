@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useCallback } from "react";
+import { createElement, ReactElement, useCallback, useMemo } from "react";
 import { ColumnsPreviewType, DatagridPreviewProps } from "../typings/DatagridProps";
 
 import { Table } from "./components/Table";
@@ -6,27 +6,30 @@ import { parseStyle } from "@widgets-resources/piw-utils";
 
 export function preview(props: DatagridPreviewProps): ReactElement {
     const data = Array.from({ length: props.pageSize ?? 5 }).map(() => ({}));
-    const columns: ColumnsPreviewType[] =
-        props.columns.length > 0
-            ? props.columns
-            : [
-                  {
-                      header: "Header",
-                      attribute: "{Attribute}",
-                      width: "autoFill",
-                      columnClass: "",
-                      filter: { renderer: () => <div />, widgetCount: 0 },
-                      resizable: false,
-                      showContentAs: "attribute",
-                      content: { renderer: () => <div />, widgetCount: 0 },
-                      dynamicText: "Dynamic Text",
-                      draggable: false,
-                      hidable: "no",
-                      size: 1,
-                      sortable: false,
-                      alignment: "left"
-                  }
-              ];
+    const columns: ColumnsPreviewType[] = useMemo(
+        () =>
+            props.columns.length > 0
+                ? props.columns
+                : [
+                      {
+                          header: "Header",
+                          attribute: "{Attribute}",
+                          width: "autoFill",
+                          columnClass: "",
+                          filter: { renderer: () => <div />, widgetCount: 0 },
+                          resizable: false,
+                          showContentAs: "attribute",
+                          content: { renderer: () => <div />, widgetCount: 0 },
+                          dynamicText: "Dynamic Text",
+                          draggable: false,
+                          hidable: "no",
+                          size: 1,
+                          sortable: false,
+                          alignment: "left"
+                      }
+                  ],
+        [props.columns]
+    );
 
     return (
         <Table
@@ -51,7 +54,7 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                             return <column.content.renderer>{renderWrapper(null, className)}</column.content.renderer>;
                     }
                 },
-                [props.columns]
+                [columns]
             )}
             columns={columns}
             columnsDraggable={props.columnsDraggable}
@@ -79,7 +82,7 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                         renderWrapper(null)
                     );
                 },
-                [props.columns]
+                [columns]
             )}
             hasMoreItems={false}
             numberOfItems={5}

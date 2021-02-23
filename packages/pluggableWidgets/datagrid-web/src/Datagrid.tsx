@@ -66,12 +66,12 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                         content = column.content?.(value);
                     }
 
+                    const onClick = useCallback(() => props.onClick?.(value).execute(), [value]);
+
                     return renderWrapper(
                         content,
                         classNames(`align-column-${column.alignment}`, column.columnClass?.(value)?.value),
-                        props.onClick
-                            ? useCallback(() => props.onClick?.(value).execute(), [props.onClick, value])
-                            : undefined
+                        props.onClick ? onClick : undefined
                     );
                 },
                 [props.columns, props.rowClass, props.onClick]
@@ -96,7 +96,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                         <FilterContext.Provider value={setValue}>{column.filter}</FilterContext.Provider>
                     );
                 },
-                [props.columns, props.datasource]
+                [props.columns, customFiltersState]
             )}
             hasMoreItems={props.datasource.hasMoreItems ?? false}
             numberOfItems={props.datasource.totalCount}

@@ -18,7 +18,8 @@
         "plugin:@typescript-eslint/recommended",
         "prettier",
         "prettier/@typescript-eslint",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
+        "plugin:react-hooks/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -136,6 +137,7 @@
         "prefer-rest-params": "error",
         "prefer-spread": "error",
         "radix": "error",
+        "react-hooks/rules-of-hooks": "warn",
         "spaced-comment": "error",
 
         "jest/no-disabled-tests": "warn",
@@ -150,6 +152,12 @@
             "rules": {
                 "@typescript-eslint/no-var-requires": "off",
                 "@typescript-eslint/class-name-casing": "off"
+            }
+        },
+        {
+            "files": ["*.editorPreview.*"],
+            "rules": {
+                "react-hooks/rules-of-hooks": "off"
             }
         }
     ]
