@@ -970,7 +970,7 @@
             "class": "table-compact"
         }
     ],
-    "com.mendix.widget.web.progressbar.ProgressBar": [
+    "com.mendix.widget.custom.progressbar.ProgressBar": [
         {
             "name": "Bar type",
             "type": "Dropdown",
